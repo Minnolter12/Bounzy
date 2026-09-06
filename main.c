@@ -1,39 +1,52 @@
-#include "raylib.h"
+#include <raylib.h> 
+#include "ball.h"
+#include "config.h"
+
 
 int main(void) {
-    InitWindow(1920, 1080, "My First Raylib Game");
+
+    ScreenConfig screen = { 1000, 1000 };
+
+    InitWindow(
+        screen.width, 
+        screen.height, 
+        "Bounzy"
+    );
 
     SetTargetFPS(60);
 
-    bool moving_right = true;
-    bool moving_left = false;
+    int speed = 5;
 
-    int player_x = 0;
-    int speed = 10;
+    Ball gameBall = {
+        .position = {
+            0.0f, 0.0f
+        },
+        .state = BALL_NOT_SPAWNED
+    };
 
     while (!WindowShouldClose()) {
 
-        BeginDrawing();
+        if (
+            IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) &&
+            gameBall.state == BALL_NOT_SPAWNED
+        ) {
+            Vector2 mouse_position = GetMousePosition();
 
-        ClearBackground(RED);
-
-        if (moving_right) {
-            player_x += speed;
-            DrawCircle(player_x, 500, 15, BLACK);
-
-            if (player_x == 1920) {
-                moving_right = !moving_right;
-                moving_left = true;
-            }
-        } else if (moving_left) {
-            player_x -= speed;
-            DrawCircle(player_x, 500, 30, BLACK);
-
-            if (player_x == 0) {
-                moving_left = !moving_left;
-                moving_right = true;
+            if (
+                mouse_position.x < screen.width &&
+                mouse_position.y < screen.height
+            ) {
+                gameBall.state = BALL_IDLE;
+                gameBall.position = mouse_position;
             }
         }
+
+        BeginDrawing();
+
+            ClearBackground(RAYWHITE);
+
+            update_and_draw_ball(&gameBall, screen, speed);
+
         
         EndDrawing();
     }

@@ -28,6 +28,6 @@ void update_and_draw_ball(
     DrawCircle(
         (int)ball->position.x,
         (int)ball->position.y,
-        5, BLACK
+        10, BLACK
     );
 }

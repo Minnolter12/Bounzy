@@ -15,7 +15,7 @@ int main(void) {
 
     SetTargetFPS(60);
 
-    int speed = 5;
+    const int speed = 10;
 
     Ball gameBall = {
         .position = {

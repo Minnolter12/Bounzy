@@ -1,6 +1,6 @@
 #include <raylib.h> 
-#include "ball.h"
-#include "config.h"
+#include "include/ball.h"
+#include "include/config.h"
 
 
 int main(void) {

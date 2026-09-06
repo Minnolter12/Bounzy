@@ -4,7 +4,7 @@ A Raylib-based ball engine simulation written in C
 
 ## Build & Run
 
-### clone the github repo using git clone, and exectute make run
+clone the github repo using git clone, and exectute make run
 
 ```bash
 

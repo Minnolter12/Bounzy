@@ -11,14 +11,16 @@ typedef enum {
 } BallState;
 
 typedef struct {
+    int radius;
+    float restitution;
     Vector2 position;
+    Vector2 velocity;
     BallState state;
 } Ball;
 
 void update_and_draw_ball(
     Ball* ball,
-    ScreenConfig screen,
-    int speed
+    ScreenConfig screen
 );
 
 #endif

@@ -1,6 +1,9 @@
 #include <raylib.h> 
+
 #include "../include/ball.h"
 #include "../include/config.h"
+
+#define DEBUG_MODE 1
 
 
 int main(void) {
@@ -15,13 +18,16 @@ int main(void) {
 
     SetTargetFPS(60);
 
-    const int speed = 10;
-
     Ball gameBall = {
+        .radius = 8,
+        .restitution = 0.89,
         .position = {
-            0.0f, 0.0f
+            0.0, 0.0
         },
-        .state = BALL_NOT_SPAWNED
+        .velocity = { 
+            0.0, 0.0 
+        },
+        .state = BALL_NOT_SPAWNED, 
     };
 
     while (!WindowShouldClose()) {
@@ -45,7 +51,7 @@ int main(void) {
 
             ClearBackground(RAYWHITE);
 
-            update_and_draw_ball(&gameBall, screen, speed);
+            update_and_draw_ball(&gameBall, screen);
 
         
         EndDrawing();

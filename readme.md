@@ -1,6 +1,6 @@
 # Bounzy 
 
-A Raylib-based ball engine simulation written in C
+A Raylib-based ball simulation engine written in C
 
 ## Build & Run
 

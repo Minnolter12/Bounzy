@@ -20,7 +20,7 @@ int main(void) {
 
     Ball gameBall = {
         .radius = 8,
-        .restitution = 0.89,
+        .restitution = 1.01,
         .position = {
             0.0, 0.0
         },

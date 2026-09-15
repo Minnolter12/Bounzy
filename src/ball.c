@@ -26,15 +26,23 @@ void update_and_draw_ball(
 
             // 1. Apply gravity and move first
             ball->velocity.y += gravity;
-            ball->position.y += (ball->velocity.y);
+            ball->position.y += ball->velocity.y;
 
-            // 2. Check collision AFTER moving
+            // 2. Check collision AFTER moving (bottom collision)
             if (ball->position.y >= screen.height) {
                 ball->position.y = screen.height;
 
                 ball->velocity.y = ((-fabsf(ball->velocity.y) * ball->restitution)); 
 
                 ball->velocity.y -= (gravity * ball->restitution); 
+            }
+            
+            if (ball->position.y <= 0) {
+                ball->position.y = 0;
+
+                ball->velocity.y = ((fabsf(ball->velocity.y) * ball->restitution)); 
+
+                ball->velocity.y += (gravity * ball->restitution); 
             }
                 
             break;

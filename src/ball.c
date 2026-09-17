@@ -11,6 +11,11 @@ void update_and_draw_ball(
     Ball* ball,
     ScreenConfig screen
 ) {
+    if (IsWindowResized()) {
+        screen.width = GetScreenWidth();
+        screen.height = GetScreenHeight();
+    }
+
     switch (ball->state) {
         case (BALL_NOT_SPAWNED): break;
 
@@ -20,7 +25,6 @@ void update_and_draw_ball(
             } break;
         }
             
-    
         case (BALL_MOVING): {
             float gravity = 0.5;
 
@@ -29,22 +33,21 @@ void update_and_draw_ball(
             ball->position.y += ball->velocity.y;
 
             // 2. Check collision AFTER moving (bottom collision)
-            if (ball->position.y >= screen.height) {
-                ball->position.y = screen.height;
+            if (ball->position.y >= screen.height - 30) {
+                ball->position.y = screen.height - 30;
 
                 ball->velocity.y = ((-fabsf(ball->velocity.y) * ball->restitution)); 
 
                 ball->velocity.y -= (gravity * ball->restitution); 
             }
             
+            // 3. Check collision AFTER moving (top collision)
             if (ball->position.y <= 0) {
                 ball->position.y = 0;
 
-                ball->velocity.y = ((fabsf(ball->velocity.y) * ball->restitution)); 
-
+                ball->velocity.y = ((fabsf(ball->velocity.y) * ball->restitution));
                 ball->velocity.y += (gravity * ball->restitution); 
             }
-                
             break;
         }
         default: break;

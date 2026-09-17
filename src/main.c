@@ -5,16 +5,13 @@
 
 #define DEBUG_MODE 1
 
-
 int main(void) {
 
+    // default screen size
     ScreenConfig screen = { 1000, 1000 };
 
-    InitWindow(
-        screen.width, 
-        screen.height, 
-        "Bounzy"
-    );
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE); 
+    InitWindow(screen.width, screen.height, "Bounzy");
 
     SetTargetFPS(60);
 
